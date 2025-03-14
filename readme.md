@@ -12,19 +12,19 @@ Easily upload files in the background while navigating between pages—just like
 ## 📦 Installation
 
 ```sh
-pnpm add react-file-uploader
+pnpm add react-background-file-uploader
 ```
 
 or using npm:
 
 ```sh
-npm install react-file-uploader
+npm install react-background-file-uploader
 ```
 
 ## 🚀 Quick Start
 
 ```tsx
-import { useBackgroundFileUpload } from "react-file-uploader";
+import { useBackgroundFileUpload } from "react-background-file-uploader";
 
 const FileUploader = () => {
   const { uploads, addUpload, startUpload, cancelUpload } = useBackgroundFileUpload();
@@ -95,18 +95,26 @@ startUpload("https://your-upload-endpoint.com", {
 
 ## 🌐 Live Example
 
-Check out the live example: [React File Uploader Example](https://react-file-uploader-example.vercel.app/)
+Check out the live example: [React Background File Uploader Example](https://react-background-file-uploader-example.vercel.app/)
 
-Explore the example code: [GitHub Example](https://github.com/akshays-repo/react-file-uploader/tree/main/packages/example)
+Explore the example code: [GitHub Example](https://github.com/akshays-repo/react-background-file-uploader/tree/main/packages/example)
 
 ## 🤝 Contributing
 
 1. Fork this repository
-2. Clone it: `git clone https://github.com/akshays-repo/react-file-uploader`
+2. Clone it: `git clone https://github.com/akshays-repo/react-background-file-uploader`
 3. Install dependencies: `pnpm install`
 4. Make your changes and submit a PR 🚀
 
 ## 📜 License
 
-MIT License © 2025 akshay-s
+MIT License © 2025 Akshay S
 
+## 👨‍💻 Author
+
+- **Akshay S**
+- 📧 Email: [akshayshan28@gmail.com](mailto:akshayshan28@gmail.com)
+
+## 🔍 Keywords
+
+React file uploader, background file upload, resumable upload, React file upload hook, concurrent file upload, real-time file upload, cancel file upload, upload progress tracking, seamless file upload, React background uploader

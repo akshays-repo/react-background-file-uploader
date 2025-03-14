@@ -1,17 +1,17 @@
 {
   "name": "react-background-file-uploader",
-  "version": "0.0.4",
-  "description": "A powerful file uploader with resumable support",
+  "version": "0.0.5",
+  "description": "A powerful file uploader with resumable support, background uploads, and real-time progress tracking.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "files": ["dist"],
-"scripts": {
-  "build": "tsup src/index.ts --dts",
-  "dev": "tsup src/index.ts --watch --dts",
-  "test": "vitest",
-  "prepare": "pnpm build"
-},
+  "scripts": {
+    "build": "tsup src/index.ts --dts",
+    "dev": "tsup src/index.ts --watch --dts",
+    "test": "vitest",
+    "prepare": "pnpm build"
+  },
   "dependencies": {
     "zustand": "^4.4.0"
   },
@@ -22,5 +22,21 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "author": {
+    "name": "Akshay S",
+    "email": "akshayshan28@gmail.com"
+  },
+  "keywords": [
+    "React file uploader",
+    "background file upload",
+    "resumable upload",
+    "React file upload hook",
+    "concurrent file upload",
+    "real-time file upload",
+    "cancel file upload",
+    "upload progress tracking",
+    "seamless file upload",
+    "React background uploader"
+  ]
 }
