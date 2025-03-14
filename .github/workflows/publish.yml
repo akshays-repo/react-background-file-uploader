@@ -18,8 +18,14 @@ jobs:
           node-version: 20
           registry-url: "https://registry.npmjs.org/"
 
+      - name: Enable Corepack (For pnpm)
+        run: corepack enable
+
       - name: Install pnpm
-        run: npm install -g pnpm
+        run: corepack prepare pnpm@latest --activate
+
+      - name: Verify pnpm Version
+        run: pnpm --version
 
       - name: Install Dependencies
         run: pnpm install
