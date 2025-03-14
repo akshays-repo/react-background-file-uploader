@@ -34,7 +34,8 @@ export const useUploadStore = create<UploadState>((set) => ({
   activeUploads: 0,
 
   addUpload: (file) => {
-    const id = crypto.randomUUID();
+    const id =
+      Date.now().toString(36) + Math.random().toString(36).substring(2);
     set((state) => ({
       uploads: [
         ...state.uploads,
