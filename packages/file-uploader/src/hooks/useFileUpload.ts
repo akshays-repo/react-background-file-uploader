@@ -113,6 +113,8 @@ export const useBackgroundFileUpload = () => {
     if (upload?.xhr) {
       console.log(`Aborting upload: ${upload.file.name}`);
       upload.xhr.abort();
+    }else{
+      removeUpload(id);
     }
   };
 
