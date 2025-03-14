@@ -18,22 +18,18 @@ jobs:
           node-version: 20
           registry-url: "https://registry.npmjs.org/"
 
-      - name: Enable Corepack (For pnpm)
-        run: corepack enable
-
-      - name: Install pnpm
-        run: corepack prepare pnpm@latest --activate
-
-      - name: Verify pnpm Version
-        run: pnpm --version
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9 # Ensure latest stable version is installed
 
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Build Package
-        run: pnpm build
+      - name: Build Packages
+        run: pnpm --filter ./packages/file-uploader build # Build only the package to publish
 
       - name: Publish to npm
-        run: pnpm publish --access public
+        run: pnpm --filter ./packages/file-uploader publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
