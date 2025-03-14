@@ -1,41 +1,38 @@
-# react-background-file-uploader
+# React File Uploader - Seamless Background Uploads
 
-A powerful React file uploader with background upload Upload files even while navigating between pages, cancel uploads on demand, and progress tracking.
+Easily upload files in the background while navigating between pages—just like Google Drive! 🚀
 
-## 🚀 Features
-- 📂 **Background uploads** – Upload files even while navigating between pages.
-- ⚡ **Concurrent uploads** – Control max concurrent uploads.
-- ✅ **Progress tracking** – Track file upload progress in real-time.
-- ❌ **Cancel uploads** – Abort uploads on demand.
+## 🌟 Features
+
+- 📂 **Background Uploads** – Continue uploading files even when navigating between pages.
+- ⚡ **Concurrent Uploads** – Control the number of parallel uploads.
+- 📊 **Progress Tracking** – Real-time upload progress for each file.
+- ❌ **Cancel Uploads** – Stop an ongoing upload anytime.
 
 ## 📦 Installation
 
 ```sh
-pnpm add react-background-file-uploader
+pnpm add react-file-uploader
 ```
 
 or using npm:
 
 ```sh
-npm install react-background-file-uploader
+npm install react-file-uploader
 ```
 
-## 🛠 Usage
-
-### Basic Example
+## 🚀 Quick Start
 
 ```tsx
-import { useFileUpload } from "react-background-file-uploader";
+import { useBackgroundFileUpload } from "react-file-uploader";
 
 const FileUploader = () => {
-  const { uploads, addUpload, startUpload, cancelUpload } = useFileUpload();
+  const { uploads, addUpload, startUpload, cancelUpload } = useBackgroundFileUpload();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
-      Array.from(files).forEach((file) => {
-        addUpload(file);
-      });
+      Array.from(files).forEach((file) => addUpload(file));
     }
   };
 
@@ -60,25 +57,27 @@ export default FileUploader;
 
 ## 🎛 API Reference
 
-### `useFileUpload()`
+### `useBackgroundFileUpload()`
+
 This hook provides all the necessary upload functions.
 
 #### **Methods**
 
-| Method         | Description |
-|---------------|-------------|
-| `addUpload(file: File)` | Adds a file to the upload queue. |
-| `startUpload(url: string)` | Starts uploading queued files. |
-| `cancelUpload(id: string)` | Cancels an active upload. |
+| Method                                              | Description                                    |
+| --------------------------------------------------- | ---------------------------------------------- |
+| `addUpload(file: File)`                             | Adds a file to the upload queue.               |
+| `startUpload(url: string, options?: UploadOptions)` | Starts uploading queued files.                 |
+| `cancelUpload(id: string)`                          | Cancels an active upload.                      |
+| `setMaxConcurrent(count: number)`                   | Sets the maximum number of concurrent uploads. |
 
 #### **Upload Object**
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `id` | `string` | Unique file identifier. |
-| `file` | `File` | File object being uploaded. |
-| `progress` | `number` | Upload progress percentage. |
-| `status` | `'pending' | 'uploading' | 'success' | 'failed'` | Current upload status. |
+| Property   | Type        | Description                 |
+| ---------- | ----------- | --------------------------- |
+| `id`       | `string`    | Unique file identifier.     |
+| `file`     | `File`      | File object being uploaded. |
+| `progress` | `number`    | Upload progress percentage. |
+| `status`   | `'pending'` `'uploading'` `'success'` `'failed'` | Current upload status. |
 
 ## ⚙ Configuration
 
@@ -87,15 +86,23 @@ You can customize the uploader with options such as **headers**, **body paramete
 ```tsx
 startUpload("https://your-upload-endpoint.com", {
   headers: { Authorization: "Bearer token" },
+  extraBody: { folder: "uploads" },
   onSuccess: (file, response) => console.log("Upload Success", file, response),
   onError: (file, error) => console.error("Upload Failed", file, error),
+  onAbort: (file) => console.warn("Upload Aborted", file),
 });
 ```
+
+## 🌐 Live Example
+
+Check out the live example: [React File Uploader Example](https://react-file-uploader-example.vercel.app/)
+
+Explore the example code: [GitHub Example](https://github.com/akshays-repo/react-file-uploader/tree/main/packages/example)
 
 ## 🤝 Contributing
 
 1. Fork this repository
-2. Clone it: `git clone https://github.com/akshays-repo/react-background-file-uploader`
+2. Clone it: `git clone https://github.com/akshays-repo/react-file-uploader`
 3. Install dependencies: `pnpm install`
 4. Make your changes and submit a PR 🚀
 
