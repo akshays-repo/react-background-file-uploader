@@ -1,10 +1,9 @@
 # react-background-file-uploader
 
-A powerful React file uploader with background upload support, resumable uploads, and progress tracking.
+A powerful React file uploader with background upload Upload files even while navigating between pages, cancel uploads on demand, and progress tracking.
 
 ## 🚀 Features
 - 📂 **Background uploads** – Upload files even while navigating between pages.
-- ⏸️ **Pause & Resume** – Supports resumable uploads.
 - ⚡ **Concurrent uploads** – Control max concurrent uploads.
 - ✅ **Progress tracking** – Track file upload progress in real-time.
 - ❌ **Cancel uploads** – Abort uploads on demand.
