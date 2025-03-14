@@ -1,0 +1,33 @@
+name: Publish Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org/'
+
+      - name: Install dependencies
+        run: pnpm install
+        working-directory: packages/file-uploader # ✅ Set the correct directory
+
+      - name: Build package
+        run: pnpm build
+        working-directory: packages/file-uploader # ✅ Set the correct directory
+
+      - name: Publish package
+        run: npm publish --access public
+        working-directory: packages/file-uploader # ✅ Set the correct directory
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
