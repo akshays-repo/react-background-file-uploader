@@ -11,7 +11,7 @@
   "dependencies": {
     "next": "15.2.2",
     "react": "^19.0.0",
-    "react-background-file-uploader": "workspace:^",
+    "react-background-file-uploader": "^0.0.3",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {

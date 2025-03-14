@@ -1,7 +1,8 @@
-import { useFileUpload } from "@/hooks/useFileUpload";
+import { useBackgroundFileUpload } from "react-background-file-uploader";
+
 
 const ListFile = () => {
-    const { uploads, cancelUpload } = useFileUpload();
+    const { uploads, cancelUpload } = useBackgroundFileUpload();
     return (
         <div className="p-4 border border-gray-300 rounded-lg">
 
