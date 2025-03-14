@@ -1,6 +1,6 @@
 {
   "name": "react-background-file-uploader",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A powerful file uploader with resumable support",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
