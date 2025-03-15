@@ -16,6 +16,22 @@ export type UploadFile = {
   error?: string;
 };
 
+/**
+ * Represents the state and actions related to file uploads.
+ *
+ * Properties:
+ * - uploads: An array of UploadFile objects representing the current uploads.
+ * - maxConcurrent: The maximum number of concurrent uploads allowed.
+ * - activeUploads: The current number of active uploads.
+ * 
+ * Functions:
+ * - addUpload: Adds a new upload entry and returns its unique ID.
+ * - updateUpload: Updates an existing upload entry with the given partial data.
+ * - removeUpload: Removes an upload entry by its unique ID.
+ * - setMaxConcurrent: Sets the maximum number of concurrent uploads.
+ * - incrementActive: Increments the count of active uploads.
+ * - decrementActive: Decrements the count of active uploads.
+ */
 type UploadState = {
   uploads: UploadFile[];
   maxConcurrent: number;
@@ -33,6 +49,12 @@ export const useUploadStore = create<UploadState>((set) => ({
   maxConcurrent: 3, // Default: 3 concurrent uploads
   activeUploads: 0,
 
+  /**
+   * Adds a new upload entry and returns its unique ID.
+   *
+   * @param file The file to upload.
+   * @returns The unique ID of the new upload entry.
+   */
   addUpload: (file) => {
     const id =
       Date.now().toString(36) + Math.random().toString(36).substring(2);

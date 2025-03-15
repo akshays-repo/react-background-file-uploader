@@ -8,6 +8,28 @@ export type UploadOptions = {
   onAbort?: (file: File) => void;
 };
 
+/**
+ * A hook to manage background file uploads with resumable support,
+ * real-time progress tracking, and concurrent uploads.
+ *
+ * Provides functions to start, cancel, and manage uploads, as well as
+ * to configure the maximum number of concurrent uploads.
+ *
+ * Returns an object with the current upload state and actions to manage
+ * uploads.
+ *
+ * Functions:
+ * - startUpload: Initiates pending uploads based on available slots.
+ * - cancelUpload: Cancels a specific upload by ID.
+ * - cancelAllUploads: Cancels all ongoing uploads.
+ * - setMaxConcurrent: Sets the maximum number of concurrent uploads.
+ *
+ * State:
+ * - uploads: List of current uploads with their status and progress.
+ * - maxConcurrent: Maximum number of concurrent uploads allowed.
+ * - addUpload: Adds a new upload entry.
+ * - removeUpload: Removes an upload entry by ID.
+ */
 export const useBackgroundFileUpload = () => {
   const {
     uploads,
@@ -21,6 +43,22 @@ export const useBackgroundFileUpload = () => {
     setMaxConcurrent,
   } = useUploadStore();
 
+  /**
+   * Starts a new upload with the given file and options.
+   *
+   * @param id Unique ID for the upload entry
+   * @param file The file to upload
+   * @param url The URL to upload to
+   * @param options Additional options for the upload
+   *
+   * The `options` object can contain the following properties:
+   *
+   * - `headers`: An object of custom headers to set on the request
+   * - `extraBody`: An object of additional form data fields to append to the request
+   * - `onSuccess`: A callback function to call when the upload is successful
+   * - `onError`: A callback function to call when the upload fails
+   * - `onAbort`: A callback function to call when the upload is canceled
+   */
   const uploadFile = (
     id: string,
     file: File,
@@ -88,6 +126,19 @@ export const useBackgroundFileUpload = () => {
     xhr.send(formData);
   };
 
+    /**
+     * Initiates uploads for pending files based on available slots.
+     * 
+     * Retrieves the current state of uploads, calculates the available slots
+     * by subtracting active uploads from the maximum allowed concurrent uploads.
+     * If slots are available, it filters the pending uploads and starts uploading
+     * them up to the number of available slots.
+     * 
+     * @param url - The URL to which the files should be uploaded.
+     * @param options - Optional configurations for the upload, including headers,
+     *                  additional body fields, and callback functions for success,
+     *                  error, and abort events.
+     */
   const startNextUpload = (url: string, options?: UploadOptions) => {
     const { uploads, activeUploads, maxConcurrent } = useUploadStore.getState();
     const availableSlots = maxConcurrent - activeUploads;
@@ -103,10 +154,30 @@ export const useBackgroundFileUpload = () => {
     }
   };
 
+  /**
+   * Initiates an upload for the provided URL and options.
+   * 
+   * If there are available slots, it will start uploading immediately.
+   * Otherwise, it will add the file to the pending uploads list and
+   * wait for an available slot.
+   * 
+   * @param url - The URL to which the files should be uploaded.
+   * @param options - Optional configurations for the upload, including headers,
+   *                  additional body fields, and callback functions for success,
+   *                  error, and abort events.
+   */
   const startUpload = (url: string, options?: UploadOptions) => {
     startNextUpload(url, options);
   };
 
+  /**
+   * Cancels an upload that is in progress or pending.
+   * 
+   * If the upload is in progress, it will be aborted.
+   * If the upload is pending, it will be removed from the list of pending uploads.
+   * 
+   * @param id - The ID of the upload to cancel.
+   */
   const cancelUpload = (id: string) => {
     const { uploads } = useUploadStore.getState();
     const upload = uploads.find((upload) => upload.id === id);
@@ -118,13 +189,34 @@ export const useBackgroundFileUpload = () => {
     }
   };
 
+  /**
+   * Cancels all uploads that are in progress or pending.
+   * 
+   * If an upload is in progress, it will be aborted.
+   * If an upload is pending, it will be removed from the list of pending uploads.
+   * 
+   * @returns void
+   */
+  const cancelAllUploads = () => {
+    const { uploads } = useUploadStore.getState();
+    uploads.forEach((upload) => {
+      if (upload.xhr) {
+        console.log(`Aborting upload: ${upload.file.name}`);
+        upload.xhr.abort();
+      } else {
+        removeUpload(upload.id);
+      }
+    });
+  };
+
   return {
     uploads,
+    maxConcurrent,
     addUpload,
     removeUpload,
     startUpload,
     cancelUpload,
     setMaxConcurrent,
-    maxConcurrent,
+    cancelAllUploads,
   };
 };

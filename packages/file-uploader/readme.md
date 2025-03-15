@@ -68,6 +68,7 @@ This hook provides all the necessary upload functions.
 | `addUpload(file: File)`                             | Adds a file to the upload queue.               |
 | `startUpload(url: string, options?: UploadOptions)` | Starts uploading queued files.                 |
 | `cancelUpload(id: string)`                          | Cancels an active upload.                      |
+| `cancelAllUploads()`                                | Cancels all uploads that are in progress or pending. |
 | `setMaxConcurrent(count: number)`                   | Sets the maximum number of concurrent uploads. |
 
 #### **Upload Object**

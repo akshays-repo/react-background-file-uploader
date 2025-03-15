@@ -1,11 +1,13 @@
 {
   "name": "react-background-file-uploader",
-  "version": "0.0.5",
+  "version": "0.0.8",
   "description": "A powerful file uploader with resumable support, background uploads, and real-time progress tracking.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --dts",
     "dev": "tsup src/index.ts --watch --dts",
@@ -23,6 +25,14 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akshays-repo/react-background-file-uploader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akshays-repo/react-background-file-uploader/issues"
+  },
+  "homepage": "https://github.com/akshays-repo/react-background-file-uploader#readme",
   "author": {
     "name": "Akshay S",
     "email": "akshayshan28@gmail.com"
